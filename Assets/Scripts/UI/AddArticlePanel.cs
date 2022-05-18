@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using TOMICZ.Data;
 using System.Collections.Generic;
+using System;
 
 namespace TOMICZ.UI
 {
@@ -22,19 +23,19 @@ namespace TOMICZ.UI
         [SerializeField] private ArticleItemPanel _articleItemPanel;
         [SerializeField] private List<TMP_InputField> _inputFieldsList = new List<TMP_InputField>();
 
+        public static event Action<string, string, float, float, float, float> OnArticleItemPanelCreatedEvent;
+
         public void AddItem()
         {
             if (IsInputFieldNotEmpty())
             {
-                CreateNewArticleDataObject
-                (
+                OnArticleItemPanelCreatedEvent?.Invoke(
                     Get(InputField.Article).text,
                     Get(InputField.Brand).text,
                     float.Parse(Get(InputField.Calories).text),
                     float.Parse(Get(InputField.Fats).text),
                     float.Parse(Get(InputField.Carbohydrates).text),
-                    float.Parse(Get(InputField.Proteins).text)
-                );
+                    float.Parse(Get(InputField.Proteins).text));
             }
 
         }
