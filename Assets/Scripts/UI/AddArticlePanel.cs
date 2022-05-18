@@ -17,6 +17,9 @@ namespace TOMICZ.UI
 
     public class AddArticlePanel : MonoBehaviour
     {
+        [Header("Dependencies")]
+        [SerializeField] private Transform _articleDatabaseContainer;
+        [SerializeField] private ArticleItemPanel _articleItemPanel;
         [SerializeField] private List<TMP_InputField> _inputFieldsList = new List<TMP_InputField>();
 
         public void AddItem()
@@ -39,7 +42,13 @@ namespace TOMICZ.UI
         private void CreateNewArticleDataObject(string articleName, string brandName, float caloriesAmount, float fatsAmount, float carbohydratesAmount, float proteinsAmount)
         {
             ArticleData article = new ArticleData(articleName, brandName, caloriesAmount, fatsAmount, carbohydratesAmount, proteinsAmount);
+            CreateNewArticlePanel();
             Debug.Log("Successfully created a new article object");
+        }
+
+        private void CreateNewArticlePanel()
+        {
+            ArticleItemPanel articleItemPanel = Instantiate(_articleItemPanel, _articleDatabaseContainer);
         }
 
         private bool IsInputFieldNotEmpty()
@@ -61,7 +70,7 @@ namespace TOMICZ.UI
             return true;
         }
 
-        public TMP_InputField Get(InputField inputFields)
+        private TMP_InputField Get(InputField inputFields)
         {
             switch (inputFields)
             {
