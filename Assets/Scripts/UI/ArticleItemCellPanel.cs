@@ -3,7 +3,7 @@ using TMPro;
 
 namespace TOMICZ.UI
 {
-    public class ArticleItemCellPanel : MonoBehaviour
+    public class ArticleItemCellPanel : Panel
     {
         [SerializeField] private TMP_Text _cellValueLabel;
 

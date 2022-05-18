@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TOMICZ.UI
 {
-    public class ArticleItemPanel : MonoBehaviour
+    public class ArticleItemPanel : Panel
     {
         [SerializeField] private List<ArticleItemCellPanel> _articleItemCellsList = new List<ArticleItemCellPanel>();
 

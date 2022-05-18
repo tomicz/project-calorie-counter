@@ -15,7 +15,7 @@ namespace TOMICZ.UI
         Proteins = 5
     }
 
-    public class AddArticlePanel : MonoBehaviour
+    public class AddArticlePanel : Panel
     {
         [Header("Dependencies")]
         [SerializeField] private Transform _articleDatabaseContainer;
@@ -42,13 +42,14 @@ namespace TOMICZ.UI
         private void CreateNewArticleDataObject(string articleName, string brandName, float caloriesAmount, float fatsAmount, float carbohydratesAmount, float proteinsAmount)
         {
             ArticleData article = new ArticleData(articleName, brandName, caloriesAmount, fatsAmount, carbohydratesAmount, proteinsAmount);
-            CreateNewArticlePanel();
-            Debug.Log("Successfully created a new article object");
+            CreateNewArticlePanel(article);
+            DisablePanel();
         }
 
-        private void CreateNewArticlePanel()
+        private void CreateNewArticlePanel(ArticleData articleData)
         {
             ArticleItemPanel articleItemPanel = Instantiate(_articleItemPanel, _articleDatabaseContainer);
+            articleItemPanel.SetData(articleData);
         }
 
         private bool IsInputFieldNotEmpty()
