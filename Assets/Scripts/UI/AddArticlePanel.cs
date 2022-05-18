@@ -44,12 +44,28 @@ namespace TOMICZ.UI
             ArticleData article = new ArticleData(articleName, brandName, caloriesAmount, fatsAmount, carbohydratesAmount, proteinsAmount);
             CreateNewArticlePanel(article);
             DisablePanel();
+            ClearFieldsOnEnd();
         }
 
         private void CreateNewArticlePanel(ArticleData articleData)
         {
             ArticleItemPanel articleItemPanel = Instantiate(_articleItemPanel, _articleDatabaseContainer);
             articleItemPanel.SetData(articleData);
+        }
+
+        private void ClearFieldsOnEnd()
+        {
+            SetValuesDefault();
+        }
+
+        private void SetValuesDefault()
+        {
+            Get(InputField.Article).text = "";
+            Get(InputField.Brand).text = "";
+            Get(InputField.Calories).text = "0";
+            Get(InputField.Fats).text = "0";
+            Get(InputField.Carbohydrates).text = "0";
+            Get(InputField.Proteins).text = "0";
         }
 
         private bool IsInputFieldNotEmpty()
