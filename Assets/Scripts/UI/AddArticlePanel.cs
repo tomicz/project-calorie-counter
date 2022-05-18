@@ -7,12 +7,12 @@ namespace TOMICZ.UI
 {
     public enum InputField
     {
-        Article,
-        Brand,
-        Calories,
-        Fats,
-        Carbohydrates,
-        Proteins
+        Article = 0,
+        Brand = 1,
+        Calories = 2,
+        Fats = 3,
+        Carbohydrates = 4,
+        Proteins = 5
     }
 
     public class AddArticlePanel : MonoBehaviour
