@@ -7,16 +7,19 @@ namespace TOMICZ.UI
 {
     public enum InputField
     {
-        Article,
-        Brand,
-        Calories,
-        Fats,
-        Carbohydrates,
-        Proteins
+        Article = 0,
+        Brand = 1,
+        Calories = 2,
+        Fats = 3,
+        Carbohydrates = 4,
+        Proteins = 5
     }
 
-    public class AddArticlePanel : MonoBehaviour
+    public class AddArticlePanel : Panel
     {
+        [Header("Dependencies")]
+        [SerializeField] private Transform _articleDatabaseContainer;
+        [SerializeField] private ArticleItemPanel _articleItemPanel;
         [SerializeField] private List<TMP_InputField> _inputFieldsList = new List<TMP_InputField>();
 
         public void AddItem()
@@ -39,7 +42,30 @@ namespace TOMICZ.UI
         private void CreateNewArticleDataObject(string articleName, string brandName, float caloriesAmount, float fatsAmount, float carbohydratesAmount, float proteinsAmount)
         {
             ArticleData article = new ArticleData(articleName, brandName, caloriesAmount, fatsAmount, carbohydratesAmount, proteinsAmount);
-            Debug.Log("Successfully created a new article object");
+            CreateNewArticlePanel(article);
+            DisablePanel();
+            ClearFieldsOnEnd();
+        }
+
+        private void CreateNewArticlePanel(ArticleData articleData)
+        {
+            ArticleItemPanel articleItemPanel = Instantiate(_articleItemPanel, _articleDatabaseContainer);
+            articleItemPanel.SetData(articleData);
+        }
+
+        private void ClearFieldsOnEnd()
+        {
+            SetValuesDefault();
+        }
+
+        private void SetValuesDefault()
+        {
+            Get(InputField.Article).text = "";
+            Get(InputField.Brand).text = "";
+            Get(InputField.Calories).text = "0";
+            Get(InputField.Fats).text = "0";
+            Get(InputField.Carbohydrates).text = "0";
+            Get(InputField.Proteins).text = "0";
         }
 
         private bool IsInputFieldNotEmpty()
@@ -61,7 +87,7 @@ namespace TOMICZ.UI
             return true;
         }
 
-        public TMP_InputField Get(InputField inputFields)
+        private TMP_InputField Get(InputField inputFields)
         {
             switch (inputFields)
             {
